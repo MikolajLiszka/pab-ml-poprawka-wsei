@@ -1,16 +1,15 @@
 import express from 'express'
 import {Request, Response} from 'express'
+import { MongoClient } from 'mongodb';
 
 const app = express()
 
+require('./db/mongodb');
+
 app.use(express.json())
 
-app.get('/restaurant', function (req: Request, res: Response) {
-  res.send('GET restaurant')
-})
-app.post('/', function (req: Request, res: Response) {
-  console.log(req.body) 
-  res.status(200).send('POST restaurant')
-})
+const restaurantRoute = require('./routes/restaurant')
+
+app.use('/', restaurantRoute)
 
 app.listen(3000)
