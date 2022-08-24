@@ -3,7 +3,7 @@ import {Request, Response} from 'express'
 const route = express.Router();
 const testActions = require('../actions/basicAndTestAction');
 
-route.get('/restaurant', testActions.testTH);
+route.get('/restaurants', testActions.testTH);
 
 
 // route.post('/restaurant', function (req: Request, res: Response) {
