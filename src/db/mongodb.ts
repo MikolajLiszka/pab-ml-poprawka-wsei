@@ -41,30 +41,32 @@
 //     console.log(restaurantOne.name);
 // }
 
-const mongoose = require ('mongoose');
+// const mongoose = require ('mongoose');
+import mongoose from "mongoose";
+// import {Restaurant} from './DTO/restaurant-model'
 
 mongoose.connect('mongodb://127.0.0.1:27017/restaurantDB')
 
-const Restaurant = mongoose.model('Restaurant',  {
-    name: String,
-    adress: String,
-    phoneNum: Number,
-    nipNum: Number,
-    email: String,
-    website: String
-})
+// const Restaurant = mongoose.model('Restaurant',  {
+//     name: String,
+//     adress: String,
+//     phoneNum: Number,
+//     nipNum: Number,
+//     email: String,
+//     website: String
+// })
 
-const newRestaurant = new Restaurant({
-    name: 'bimbap',
-    adress: 'kowalska 7',
-    phoneNum: 909090902,
-    nipNum: 5647474,
-    email: 'fhebfe@unfe.pl',
-    website: 'bimbap.pl'
-})
-newRestaurant.save().then(() => {
-    console.log("restaurant saved")
-});
+// const newRestaurant = new Restaurant({
+//     name: 'bimbap',
+//     adress: 'kowalska 7',
+//     phoneNum: 909090902,
+//     nipNum: 5647474,
+//     email: 'fhebfe@unfe.pl',
+//     website: 'bimbap.pl'
+// })
+// newRestaurant.save().then(() => {
+//     console.log("restaurant saved")
+// });
 
 
 
