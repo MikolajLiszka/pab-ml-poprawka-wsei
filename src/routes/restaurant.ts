@@ -11,3 +11,4 @@ route.post('/restaurant', function (req: Request, res: Response) {
   })
 
   module.exports = route;
+

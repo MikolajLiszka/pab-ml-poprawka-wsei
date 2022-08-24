@@ -1,31 +1,71 @@
-import {MongoClient} from 'mongodb'
+// import {Schema, model, connect} from 'mongoose';
+// import { runInContext } from 'vm';
 
+// const url = 'mongodb://127.0.0.1:27017'
+// const dbname = 'mongodb-restaurant'
 
-const url = 'mongodb://127.0.0.1:27017'
-const dbname = 'mongodb-restaurant'
+// interface IRestaurant {
+//     name: string;
+//     adress: string;
+//     phoneNum: number;
+//     nipNum: number;
+//     email: string;
+//     website: string;
+// }
 
-MongoClient.connect(url, {}, (error, client) => {
-    if(error) {
-        console.log("niepołączone")
-    } else {
-        if(client) {
-            const db = client.db(dbname)
-            db.collection('restaurant').insertOne({
-                nazwa: "Pin/o",
-                adres: "sss 87",
-                telefon: "787847536",
-                nip: "5604820",
-                email: "ijuejfujeu@jffj.pl",
-                www: "www.pino.pl"
-            }, (error, result) => {
-                if(error) {
-                    console.log("dodawanie restauracji błąd", error)
-                } else {
-                    console.log(result)
-                }
-            })
-        }
+// const restaurantSchema = new Schema<IRestaurant>({
+//     name: {type: String, required: true},
+//     adress: {type: String, required: true},
+//     phoneNum: {type: Number, required: true},
+//     nipNum: {type: Number, required: true},
+//     email: {type: String, required: true},
+//     website: {type: String, required: true}
+// })
 
-        console.log("połączone")
-    }
+// const Restaurant = model <IRestaurant>('Restaurant', restaurantSchema)
+// run().catch(err => console.log(err));
+
+// async function run(){
+//     await connect(url);
+
+//     const restaurantOne = new Restaurant ({
+//         name: 'bimbap',
+//         adress: 'kowalska 7',
+//         phoneNum: 909090902,
+//         nipNum: 5647474,
+//         email: 'fhebfe@unfe.pl',
+//         website: 'bimbap.pl'
+//     });
+//     await restaurantOne.save();
+
+//     console.log(restaurantOne.name);
+// }
+
+const mongoose = require ('mongoose');
+
+mongoose.connect('mongodb://127.0.0.1:27017/restaurantDB')
+
+const Restaurant = mongoose.model('Restaurant',  {
+    name: String,
+    adress: String,
+    phoneNum: Number,
+    nipNum: Number,
+    email: String,
+    website: String
 })
+
+const newRestaurant = new Restaurant({
+    name: 'bimbap',
+    adress: 'kowalska 7',
+    phoneNum: 909090902,
+    nipNum: 5647474,
+    email: 'fhebfe@unfe.pl',
+    website: 'bimbap.pl'
+})
+newRestaurant.save().then(() => {
+    console.log("restaurant saved")
+});
+
+
+
+
