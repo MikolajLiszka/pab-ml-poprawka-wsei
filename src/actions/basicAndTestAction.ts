@@ -1,26 +1,80 @@
 import express from 'express'
 import {Request, Response} from 'express'
 import mongoose from "mongoose";
+import { EmitFlags } from 'typescript';
 import { Restaurant } from '../db/DTO/restaurant-model'
 
-module.exports = {
-    // testTH(req: Request, res: Response) {
-    //     res.send("siema")
-    // }
+export class RestaurantActions {
 
-    testTH(req: Request, res: Response) {
+    async saveRestaurant(req: Request, res: Response) {
+
+        const name  = req.body.name;
+        const adress  = req.body.adress;
+        const phoneNum  = req.body.phoneNum;
+        const nipNum  = req.body.nipNum;
+        const email  = req.body.email;
+        const website  = req.body.website;
+
         const newRestaurant = new Restaurant({
-            name: 'bimbap',
-            adress: 'kowalska 7',
-            phoneNum: 909090902,
-            nipNum: 5647474,
-            email: 'fhebfe@unfe.pl',
-            website: 'bimbap.pl'
-        })
-        newRestaurant.save().then(() => {
-            console.log("restaurant saved")
+            name: name,
+            adress: adress,
+            phoneNum: phoneNum,
+            nipNum: nipNum,
+            email: email,
+            website: website
         });
 
-        res.send("siema")
+        await newRestaurant.save();
+
+        res.status(201).json(newRestaurant);
+    }
+
+    async getAllRestaurants(req: Request, res: Response) {
+        
+        const doc = Restaurant.find({}, (err: any, doc: any) => {
+            console.log(doc);
+            res.status(200).json(doc);
+        });
+
+
+        // res.send("getAllRestaurants");
+    }
+
+    async getRestaurant(req: Request, res: Response) {
+
+        const id = req.params.id;
+        const restaurant =  await Restaurant.findOne({ _id: id });
+
+        res.status(200).json(restaurant);
+    }
+
+    async updateRestaurant(req: Request, res: Response) {
+
+        const id = req.params.id;
+        const name  = req.body.name;
+        const adress  = req.body.adress;
+        const phoneNum  = req.body.phoneNum;
+        const nipNum  = req.body.nipNum;
+        const email  = req.body.email;
+        const website  = req.body.website;
+        
+        const restaurant = await Restaurant.findOne({ _id: id });
+        // restaurant.name == name;
+        // restaurant.adress == adress;
+        // restaurant.phoneNum == phoneNum;
+        // restaurant.nipNum == nipNum;
+        // restaurant.email == email;
+        // restaurant.website == website;
+        // await restaurant.save();
+        res.status(201).json(restaurant);
+    }
+
+    deleteRestaurant(req: Request, res: Response) {
+
+        const id = req.params.id;
+
+        res.send("deleteRestaurant with id: " + id)
     }
 }
+
+module.exports = new RestaurantActions();

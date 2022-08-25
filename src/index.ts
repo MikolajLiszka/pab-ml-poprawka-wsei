@@ -1,12 +1,15 @@
 import express from 'express'
 import {Request, Response} from 'express'
 import { MongoClient } from 'mongodb';
+import bodyParser from 'body-parser';
 
 const app = express()
 
 require('./db/mongodb');
 
 app.use(express.json())
+
+app.use(bodyParser.json())
 
 const restaurantRoute = require('./routes/restaurant')
 
