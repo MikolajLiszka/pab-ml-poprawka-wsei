@@ -69,11 +69,13 @@ export class RestaurantActions {
         res.status(201).json(restaurant);
     }
 
-    deleteRestaurant(req: Request, res: Response) {
+    async deleteRestaurant(req: Request, res: Response) {
 
         const id = req.params.id;
+        await Restaurant.deleteOne({ _id:id });
 
-        res.send("deleteRestaurant with id: " + id)
+
+        res.sendStatus(204);
     }
 }
 
