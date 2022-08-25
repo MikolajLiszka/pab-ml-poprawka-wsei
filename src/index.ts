@@ -11,6 +11,8 @@ app.use(express.json())
 
 app.use(bodyParser.json())
 
+const tableRoute = require('./actions/table-actions')
+
 const restaurantRoute = require('./routes/restaurant')
 
 app.use('/', restaurantRoute)

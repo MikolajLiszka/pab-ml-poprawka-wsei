@@ -1,17 +1,17 @@
 import express, { Router } from 'express'
 import {Request, Response} from 'express'
 const route = express.Router();
-const testActions = require('../actions/basicAndTestAction');
+const restaurantActions = require('../actions/restaurant-actions');
 
-route.get('/restaurants', testActions.getAllRestaurants);
+route.get('/restaurants', restaurantActions.getAllRestaurants);
 
-route.get('/restaurants/:id', testActions.getRestaurant);
+route.get('/restaurants/:id', restaurantActions.getRestaurant);
 
-route.post('/restaurants', testActions.saveRestaurant);
+route.post('/restaurants', restaurantActions.saveRestaurant);
 
-route.put('/restaurants/:id', testActions.updateRestaurant);
+route.put('/restaurants/:id', restaurantActions.updateRestaurant);
 
-route.delete('/restaurants/:id', testActions.deleteRestaurant);
+route.delete('/restaurants/:id', restaurantActions.deleteRestaurant);
 
 
 // route.post('/restaurant', function (req: Request, res: Response) {

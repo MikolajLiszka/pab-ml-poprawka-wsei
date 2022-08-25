@@ -14,7 +14,7 @@ export class RestaurantActions {
         const nipNum  = req.body.nipNum;
         const email  = req.body.email;
         const website  = req.body.website;
-
+        
         const newRestaurant = new Restaurant({
             name: name,
             adress: adress,
@@ -59,13 +59,13 @@ export class RestaurantActions {
         const website  = req.body.website;
         
         const restaurant = await Restaurant.findOne({ _id: id });
-        // restaurant.name == name;
-        // restaurant.adress == adress;
-        // restaurant.phoneNum == phoneNum;
-        // restaurant.nipNum == nipNum;
-        // restaurant.email == email;
-        // restaurant.website == website;
-        // await restaurant.save();
+        restaurant!.name == name;
+        restaurant!.adress == adress;
+        restaurant!.phoneNum == phoneNum;
+        restaurant!.nipNum == nipNum;
+        restaurant!.email == email;
+        restaurant!.website == website;
+        await restaurant!.save();
         res.status(201).json(restaurant);
     }
 
