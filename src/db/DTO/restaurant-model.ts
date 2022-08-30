@@ -26,6 +26,12 @@ const restaurantSchema = new Schema ({
         type: String,
         required: true
     }
+    // employees: {
+    //     type: [String]
+    // },
+    // reservations: {
+    //     type: [String]
+    // }
     });
 
 export const Restaurant = mongoose.model('Restaurant', restaurantSchema) 

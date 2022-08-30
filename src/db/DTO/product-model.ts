@@ -9,15 +9,9 @@ const productSchema = new Schema ({
     price: {
         type: Number,
         required: true
-    },
-    quantity: {
-        type: Number,
-        required: true
-    },
-    unitOfMeasure: {
-        type: String,
-        required: true
     }
 });
 
 export const Product = mongoose.model('Product', productSchema);
+
+module.exports = Product;

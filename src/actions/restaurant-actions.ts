@@ -49,24 +49,27 @@ export class RestaurantActions {
     }
 
     async updateRestaurant(req: Request, res: Response) {
-
+        const {adress, name} = req.body
         const id = req.params.id;
-        const name  = req.body.name;
-        const adress  = req.body.adress;
+      
         const phoneNum  = req.body.phoneNum;
         const nipNum  = req.body.nipNum;
         const email  = req.body.email;
         const website  = req.body.website;
         
         const restaurant = await Restaurant.findOne({ _id: id });
-        restaurant!.name == name;
-        restaurant!.adress == adress;
-        restaurant!.phoneNum == phoneNum;
-        restaurant!.nipNum == nipNum;
-        restaurant!.email == email;
-        restaurant!.website == website;
-        await restaurant!.save();
-        res.status(201).json(restaurant);
+
+        if(restaurant) {
+            restaurant.name = name;
+            restaurant.adress = adress;
+            restaurant.phoneNum = phoneNum;
+            restaurant.nipNum = nipNum;
+            restaurant.email = email;
+            restaurant.website = website;
+            await restaurant.save();
+            res.status(201).json(restaurant);
+        }
+
     }
 
     async deleteRestaurant(req: Request, res: Response) {
