@@ -3,19 +3,28 @@ import {Request, Response} from 'express'
 import mongoose from "mongoose";
 import { EmitFlags } from 'typescript';
 import { Dish } from '../db/DTO/dish-model'
+import { Product } from '../db/DTO/product-model';
 
 export class DishActions {
 
     async saveDish(req: Request, res: Response) {
 
         const name = req.body.name;
-        const product = req.body.product;
+        const products = req.body.products;
         const price = req.body.price;
         const category = req.body.category;
 
+    //     Product.find({}).populate('Dish')
+    // .exec(function (error, result) {
+    //     return callback(null, null);
+    // });
+
         const newDish = new Dish ({
             name: name,
-            product: product,
+            products : [
+                {name: products.name},
+                {price: products.price}
+            ],
             price: price,
             category: category
         })
