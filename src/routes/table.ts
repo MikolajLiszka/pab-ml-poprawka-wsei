@@ -7,6 +7,8 @@ router.get('/tables', tableActions.getAllTables);
 
 router.get('/tables/:id', tableActions.getTable);
 
+router.get('/free', tableActions.getAllFreeTables)
+
 router.post('/tables', tableActions.saveTable);
 
 router.put('/tables/:id', tableActions.updateTable);

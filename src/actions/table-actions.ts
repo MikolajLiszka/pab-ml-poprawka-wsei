@@ -1,5 +1,6 @@
 import express from 'express'
 import {Request, Response} from 'express'
+import { Db } from 'mongodb';
 import mongoose from 'mongoose'
 import { Restaurant } from '../db/DTO/restaurant-model';
 import { Table } from '../db/DTO/table-model'
@@ -38,12 +39,20 @@ export class TableActions {
         res.status(201).json(table);
     }
 
+    async getAllFreeTables(req: Request, res: Response) {
+
+        const freeTables = Table.find({}, (err: any, freeTables: any) => {
+            const status = req.body.status;
+
+        })
+    }
+
     async updateTable(req: Request, res: Response) {
         const id = req.params.id;
 
         const name = req.body.name;
         const pplCount = req.body.pplCount;
-        const status = req.body.status
+        const status = req.body.status;
 
         const table = await Table.findOne({ _id: id })
 
