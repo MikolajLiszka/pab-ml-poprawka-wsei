@@ -10,9 +10,9 @@ const tableSchema = new Schema ({
         type: Number,
         required: true
     },
-    status: {
-        type: String,
-        required: true
+    taken: {
+        type: Boolean,
+        default: false
     }
 });
 

@@ -3,10 +3,7 @@ const {Schema} = mongoose;
 import { Table } from "./table-model";
 
 const reservationSchema = new Schema ({
-    table: {
-        type: Array,
-        required: true
-    },
+    table: {type: mongoose.Schema.Types.ObjectId, ref: 'Table'},
     start: {
         type: Date,
         // required: true,

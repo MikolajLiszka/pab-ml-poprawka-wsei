@@ -1,3 +1,4 @@
+import { table } from 'console';
 import express from 'express'
 import {Request, Response} from 'express'
 import { Db } from 'mongodb';
@@ -11,12 +12,12 @@ export class TableActions {
 
         const name = req.body.name;
         const pplCount = req.body.pplCount;
-        const status = req.body.status
+        const taken = req.body.taken
 
         const newTable = new Table({
             name: name,
             pplCount: pplCount,
-            status: status
+            taken: taken
         })
 
         await newTable.save();
@@ -41,25 +42,33 @@ export class TableActions {
 
     async getAllFreeTables(req: Request, res: Response) {
 
-        const freeTables = Table.find({}, (err: any, freeTables: any) => {
-            const status = req.body.status;
+        const doc = Table.find({}, (err: any, doc: any) => {
+            const id = req.params.id;
+            const taken = req.body.taken;
+            let free: Object[] = [];
 
+        doc
+        free.forEach((element) => {
+            if(taken == false)
+            free.push(element)
         })
-    }
+        res.status(200).json(free)
+    })
+}
 
     async updateTable(req: Request, res: Response) {
         const id = req.params.id;
 
         const name = req.body.name;
         const pplCount = req.body.pplCount;
-        const status = req.body.status;
+        const taken = req.body.taken;
 
         const table = await Table.findOne({ _id: id })
 
         if(table) {
             table.name = name;
             table.pplCount = pplCount;
-            table.status = status;
+            table.taken = taken;
             await table.save();
             res.status(201).json(table);
         }
