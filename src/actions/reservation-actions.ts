@@ -5,21 +5,32 @@ import mongoose from 'mongoose'
 import { EmitFlags } from 'typescript'
 import { Reservation } from '../db/DTO/reservation-model';
 import { Table } from '../db/DTO/table-model';
+import { ObjectId } from 'mongodb';
 
 export class ReservationActions {
 
     async saveReservation(req: Request, res: Response) {
-        const { tableId } = req.params;
-        const newReservation = new Reservation (req.body);
-        console.log('new res', newReservation);
+
+        const table = req.body.table;
+        const start = req.body.start;
+        const end = req.body.end;
+        const client = req.body.client;
+
+        const newReservation = new Reservation ({
+            table: table,
+            start: start,
+            end: end,
+            client: client
+        })
+
         await newReservation.save();
+        res.status(201).json(newReservation);
         
     }
 
     async getAllReservations(req: Request, res: Response) {
-        const { tableId } = req.params;
-        const reservation = await Reservation.findById(tableId);
-        console.log('Reservation', reservation);
+        const reservations = await  Reservation.find().populate("Table");
+        console.log("All resrvations", reservations);
     }
 }
 

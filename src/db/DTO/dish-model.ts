@@ -8,7 +8,8 @@ const dishSchema = new Schema ({
         reqired: true
     },
     products: [{
-        type: Schema.Types.ObjectId, ref: "Product"
+        type: Schema.Types.ObjectId, 
+        ref: "Product"
     }],
     price: {
         type: Number,

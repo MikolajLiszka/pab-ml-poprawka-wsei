@@ -43,18 +43,34 @@ export class TableActions {
     async getAllFreeTables(req: Request, res: Response) {
 
         const doc = Table.find({}, (err: any, doc: any) => {
-            const id = req.params.id;
-            const taken = req.body.taken;
-            let free: Object[] = [];
 
-        doc
-        free.forEach((element) => {
-            if(taken == false)
-            free.push(element)
+        let array: Object[] = [];
+
+        doc.forEach((free: any) => {
+            if(free.taken == false){
+                array.push(free.name, free.pplCount, free.taken);
+            }
+            // console.log(free.taken, free.name)
         })
-        res.status(200).json(free)
+        res.status(200).json(array);
     })
 }
+
+    async getAllTakenTables(req: Request, res: Response) {
+
+        const doc = Table.find({}, (err: any, doc: any) => {
+
+            let array: Object[] = [];
+    
+            doc.forEach((taken: any) => {
+                if(taken.taken == true){
+                    array.push(taken.name, taken.pplCount, taken.taken);
+                }
+                // console.log(free.taken, free.name)
+            })
+            res.status(200).json(array);
+        })
+    }
 
     async updateTable(req: Request, res: Response) {
         const id = req.params.id;
