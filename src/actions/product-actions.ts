@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import { Product } from '../db/DTO/product-model'
 
 export class ProductActions {
-
     async saveProduct(req: Request, res: Response) {
 
         const name = req.body.name;
@@ -24,8 +23,16 @@ export class ProductActions {
 
         const doc = Product.find({}, (err: any, doc: any) => {
             console.log(doc);
-            res.status(200).json(doc);
+            return res.status(200).json(doc);
         });
+
+        // const productPromise = Product.paginate({
+        //     limit: req.query.per_page || 2,
+        //     previous: req.query.previous || null,
+        //     next: req.query.next || null
+        // })
+
+        // return res.status(200).json(doc);
     }
 
     async getProduct(req: Request, res: Response) {

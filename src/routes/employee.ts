@@ -7,6 +7,8 @@ route.get('/employees', employeesActions.getAllEmployees);
 
 route.get('/employees/:id', employeesActions.getEmployee);
 
+route.get('/waiters', employeesActions.getAllWaiters);
+
 route.post('/employees', employeesActions.saveEmployee);
 
 route.put('/employees/:id', employeesActions.updateEmployee);

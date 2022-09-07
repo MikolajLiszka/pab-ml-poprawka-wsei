@@ -11,6 +11,8 @@ export class ReservationActions {
 
     async saveReservation(req: Request, res: Response) {
 
+        const id = req.params.id
+
         const table = req.body.table;
         const start = req.body.start;
         const end = req.body.end;

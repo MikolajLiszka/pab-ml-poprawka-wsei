@@ -2,9 +2,10 @@ import { table } from 'console';
 import express from 'express'
 import {Request, Response} from 'express'
 import { Db } from 'mongodb';
-import mongoose from 'mongoose'
+import mongoose, { Collection } from 'mongoose'
 import { Restaurant } from '../db/DTO/restaurant-model';
 import { Table } from '../db/DTO/table-model'
+import { readlink } from 'fs';
 
 export class TableActions {
 
@@ -48,13 +49,27 @@ export class TableActions {
 
         doc.forEach((free: any) => {
             if(free.taken == false){
-                array.push(free.name, free.pplCount, free.taken);
+                array.push(free);
             }
             // console.log(free.taken, free.name)
         })
         res.status(200).json(array);
     })
 }
+
+        // const collection = await Table.find({ pplCount: false})
+
+        // let array: Object[] = [];
+
+        // collection
+        //     .forEach((element) => {
+        //     if(element.pplCount >= req.body.pplCount) {
+        //         array.push(element)
+        //     }
+        // })
+        //     res.status(201).json(array);
+        // }
+
 
     async getAllTakenTables(req: Request, res: Response) {
 
@@ -64,7 +79,7 @@ export class TableActions {
     
             doc.forEach((taken: any) => {
                 if(taken.taken == true){
-                    array.push(taken.name, taken.pplCount, taken.taken);
+                    array.push(taken);
                 }
                 // console.log(free.taken, free.name)
             })

@@ -37,6 +37,20 @@ export class EmployeeActions {
         res.status(200).json(employee);
     }
 
+    async getAllWaiters(req: Request, res: Response) {
+        const doc = Employee.find({}, (err: any,doc: any) => {
+
+            let array: Object[] = [];
+
+            doc.forEach((waiters: any) => {
+                if(waiters.position == "Kelner") {
+                    array.push(waiters);
+                }
+            });
+            res.status(200).json(array);
+        })
+    }
+
     async updateEmployee(req: Request, res: Response) {
 
         const id = req.params.id;
