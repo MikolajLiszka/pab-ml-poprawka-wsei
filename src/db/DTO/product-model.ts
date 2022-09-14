@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 // const mongoPagination = require('mongo-cursor-pagination');
+const aggregatePaginate = require('mongoose-aggregate-paginate-v2');
 
 const {Schema} = mongoose;
 
@@ -26,6 +27,7 @@ const productSchema = new Schema ({
 });
 
 // productSchema.plugin(mongoPagination.mongoosePlugin);
+productSchema.plugin(aggregatePaginate);
 
 export const Product = mongoose.model('Product', productSchema);
 

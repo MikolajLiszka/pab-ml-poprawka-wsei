@@ -49,6 +49,7 @@ export class EmployeeActions {
             });
             res.status(200).json(array);
         })
+
     }
 
     async updateEmployee(req: Request, res: Response) {

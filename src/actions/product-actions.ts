@@ -1,6 +1,7 @@
 import express, { response } from 'express'
 import {Request, Response} from 'express'
 import mongoose from "mongoose";
+import { stringify } from 'querystring';
 import { Product } from '../db/DTO/product-model'
 
 export class ProductActions {
@@ -47,7 +48,11 @@ export class ProductActions {
     }
 
     // async searchProduct(req: Request, res: Response) {
-    //     Product.find()
+    //     const match = {}
+
+    //     if(req.query.category) {
+    //         match.category = req.body.category = 'Warzywa'
+    //     }
     // }
 
     async updateProduct(req: Request, res: Response) {

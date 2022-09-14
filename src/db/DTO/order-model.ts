@@ -6,20 +6,23 @@ import { Table } from "./table-model";
 
 const orderSchema = new Schema ({
     employee: {
-        type: String,
-        required: true
+        // type: String,
+        // required: true
+        type: mongoose.Types.ObjectId,
+        ref: "Employee",
     },
-    dishes: {
-        type: String,
-        required: true
-    },
+    dishes: [{
+        type: Schema.Types.ObjectId,
+        ref: "Dish",
+    }],
     status: {
         type: String,
         required: true
     },
-    table: {
+    reservation: {
         type: mongoose.Types.ObjectId,
-        ref: "Table",
+        ref: "Reservation",
+        // type: String,
     },
     price: {
         type: Number,

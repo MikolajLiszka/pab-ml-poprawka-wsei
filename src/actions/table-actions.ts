@@ -60,6 +60,7 @@ export class TableActions {
 //         })
 //         res.status(200).json(array);
 //     })
+
 // }
 
         // const collection = await Table.find({ pplCount: false})

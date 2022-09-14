@@ -13,10 +13,6 @@ const tableSchema = new Schema({
     reservation: {
       type: mongoose.Types.ObjectId,
       ref: "Reservation",
-    },
-    order: {
-      type: mongoose.Types.ObjectId,
-      ref: "Order",
     }
   });
 

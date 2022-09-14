@@ -46,6 +46,43 @@ export class DishActions {
             return res.status(200).json(doc);
 
     }
+
+    async getDish(req: Request, res: Response) {
+
+        const id = req.params.id;
+        const dish = await Dish.findOne({ _id:id })
+
+        res.status(200).json(dish);
+    }
+
+    async updateDish(req: Request, res: Response) {
+
+        const id = req.params.id;
+
+        const name = req.body.name;
+        const products = req.body.products;
+        const price = req.body.price;
+        const category = req.body.category;
+
+        const dish = await Dish.findOne({ _id: id });
+
+        if(dish) {
+            dish.name = name;
+            dish.products = products;
+            dish.price = price;
+            dish.category = category;
+            await dish.save();
+            res.status(201).json(dish);
+        }
+    }
+
+    async deleteDish(req: Request, res: Response) {
+
+        const id = req.params.id;
+        await Dish.deleteOne({ _id: id });
+
+        res.sendStatus(204);
+    }
 }
 
 module.exports = new DishActions();

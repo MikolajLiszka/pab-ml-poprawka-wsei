@@ -13,6 +13,10 @@ const employeeSchema = new Schema ({
     position: {
         type: String,
         required: true
+    },
+    order: {
+        type: Schema.Types.ObjectId,
+        ref: "Order",
     }
 });
 
