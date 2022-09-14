@@ -15,8 +15,8 @@ const orderSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: "Dish",
     }],
-    status: {
-        type: String,
+    isReady: {
+        type: Boolean,
         required: true
     },
     reservation: {

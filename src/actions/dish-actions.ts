@@ -28,7 +28,7 @@ export class DishActions {
 
         await newDish.save();
 
-        const productsById = Product.updateOne({_id: newDish.products?.id}, {$set:{dish: newDish.id}})
+        const productsById = Product.updateOne({_id: newDish.products}, {$set:{dish: newDish.id}})
 
         res.status(201).json(newDish);
     }
@@ -41,7 +41,9 @@ export class DishActions {
         //     next: req.query.next || null
         // })
 
-        const doc = await Dish.find().populate("products")
+        const doc = await Dish.find().populate({
+            path: 'products products',
+        })
             console.log(doc);
             return res.status(200).json(doc);
 

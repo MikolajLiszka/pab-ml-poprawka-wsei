@@ -48,17 +48,17 @@ export class TableActions {
 
 //     async getAllFreeTables(req: Request, res: Response) {
 
-//         const doc = Table.find({}, (err: any, doc: any) => {
+        // const doc = Table.find({}, (err: any, doc: any) => {
 
-//         let array: Object[] = [];
+        // let array: Object[] = [];
 
-//         doc.forEach((free: any) => {
-//             if(free.taken == false){
-//                 array.push(free);
-//             }
-//             // console.log(free.taken, free.name)
-//         })
-//         res.status(200).json(array);
+        // doc.forEach((free: any) => {
+        //     if(free.taken == false){
+        //         array.push(free);
+        //     }
+        //     // console.log(free.taken, free.name)
+        // })
+        // res.status(200).json(array);
 //     })
 
 // }

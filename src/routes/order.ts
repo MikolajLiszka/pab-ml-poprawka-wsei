@@ -5,8 +5,11 @@ const orderActions = require('../actions/order-actions');
 
 route.get('/orders', orderActions.getAllOrders);
 
-
 route.get('/orders/:id', orderActions.getOrder);
+
+route.get('/readyOrders', orderActions.getReadyOrders);
+
+route.get('/notReadyOrders', orderActions.getNotReadyOrders);
 
 route.post('/orders', orderActions.saveOrder);
 
