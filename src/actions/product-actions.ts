@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { response } from 'express'
 import {Request, Response} from 'express'
 import mongoose from "mongoose";
 import { Product } from '../db/DTO/product-model'
@@ -8,10 +8,14 @@ export class ProductActions {
 
         const name = req.body.name;
         const price = req.body.price;
+        const count = req.body.count;
+        const category = req.body.category;
 
         const newProduct = new Product({
             name: name,
-            price: price
+            price: price,
+            count: count,
+            category: category
         });
 
         await newProduct.save();
@@ -21,18 +25,16 @@ export class ProductActions {
 
     async getAllProducts(req: Request, res: Response) {
 
-        const doc = Product.find({}, (err: any, doc: any) => {
-            console.log(doc);
-            return res.status(200).json(doc);
-        });
-
-        // const productPromise = Product.paginate({
+        // const productPromise= Product.paginate({
         //     limit: req.query.per_page || 2,
         //     previous: req.query.previous || null,
         //     next: req.query.next || null
         // })
 
-        // return res.status(200).json(doc);
+        const doc = await Product.find()
+            console.log(doc);
+            return res.status(200).json(doc);
+
     }
 
     async getProduct(req: Request, res: Response) {
@@ -44,17 +46,25 @@ export class ProductActions {
         res.status(200).json(product);
     }
 
+    // async searchProduct(req: Request, res: Response) {
+    //     Product.find()
+    // }
+
     async updateProduct(req: Request, res: Response) {
         
         const id = req.params.id;
         const name = req.body.name;
         const price = req.body.price;
+        const count = req.body.count;
+        const category = req.body.category;
 
         const product = await Product.findOne({ _id: id});
 
         if(product) {
             product.name = name;
             product.price = price;
+            product.count = count;
+            product.category = category;
             await product.save();
             res.status(201).json(product)
         }

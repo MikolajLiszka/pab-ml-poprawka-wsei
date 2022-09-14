@@ -37,6 +37,42 @@ export class ReservationActions {
 
         res.status(201).json(reservations);
     }
+
+    async getReservation(req: Request, res: Response){
+
+      const id = req.params.id;
+
+      const reservation = await Reservation.findOne({_id:id}).populate("table")
+
+      res.status(200).json(reservation);
+    }
+
+    async updateReservation(req: Request, res: Response) {
+
+      const id = req.params.id;
+      const table = req.body.table;
+      const start = req.body.start;
+      const end = req.body.end;
+      const client = req.body.client;
+
+      const reservation = await Reservation.findOne({_id: id}).populate("table");
+
+      if(reservation) {
+        reservation.table = table;
+        reservation.start = start;
+        reservation.end = end;
+        reservation.client = client;
+        await reservation.save();
+        res.status(201).json(reservation);
+      }
+    }
+
+    async deleteReservation(req: Request, res: Response) {
+      const id = req.params.id;
+      await Reservation.deleteOne({ _id:id });
+
+      res.sendStatus(204);  
+    }
 }
 
 module.exports = new ReservationActions();

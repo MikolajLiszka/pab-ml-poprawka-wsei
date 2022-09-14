@@ -21,25 +21,30 @@ export class DishActions {
 
         const newDish = new Dish ({
             name: name,
-            products : [
-                {name: products.name},
-                {price: products.price}
-            ],
+            products: products,
             price: price,
             category: category
         })
 
         await newDish.save();
 
+        const productsById = Product.updateOne({_id: newDish.products?.id}, {$set:{dish: newDish.id}})
+
         res.status(201).json(newDish);
     }
 
-    async getAllDishes(req:Request, res: Response) {
+    async getAllDishes(req: Request, res: Response) {
 
-        const doc = Dish.find({}, (err: any, doc: any) => {
+        // const productPromise= Product.paginate({
+        //     limit: req.query.per_page || 2,
+        //     previous: req.query.previous || null,
+        //     next: req.query.next || null
+        // })
+
+        const doc = await Dish.find().populate("products")
             console.log(doc);
-            res.status(200).json(doc);
-        })
+            return res.status(200).json(doc);
+
     }
 }
 

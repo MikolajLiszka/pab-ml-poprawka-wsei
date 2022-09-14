@@ -30,7 +30,7 @@ export class OrderActions {
 
         await newOrder.save();
 
-        const tableById = Table.updateOne({_id: newOrder?.table?.id},{$set:{order: newOrder.id}})
+        // const tableById = Table.updateOne({_id: newOrder?.table?.id},{$set:{order: newOrder.id}})
         res.status(201).json(newOrder);
     }
     async getAllOrders(req: Request, res: Response) {
@@ -39,6 +39,43 @@ export class OrderActions {
 
         res.status(201).json(orders);
     }
+    async getOrder(req: Request, res: Response){
+
+        const id = req.params.id;
+  
+        const order = await Order.findOne({_id:id})
+  
+        res.status(200).json(order);
+      }
+  
+      async updateOrder(req: Request, res: Response) {
+  
+        const id = req.params.id;
+        const employee= req.body.employee;
+        const dishes= req.body.dishes;
+        const status= req.body.status;
+        const table= req.body.table;
+        const price= req.body.price;
+  
+        const order = await Order.findOne({_id: id});
+  
+        if(order) {
+            order.employee = employee;
+            order.dishes = dishes;
+            order.status = status;
+            order.table = table;
+            order.price = price;
+          await order.save();
+          res.status(201).json(order);
+        }
+      }
+  
+      async deleteOrder(req: Request, res: Response) {
+        const id = req.params.id;
+        await Order.deleteOne({ _id:id });
+  
+        res.sendStatus(204);  
+      }
 }
 
 module.exports = new OrderActions();

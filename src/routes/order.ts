@@ -6,12 +6,12 @@ const orderActions = require('../actions/order-actions');
 route.get('/orders', orderActions.getAllOrders);
 
 
-// route.get('/reservations/:id', reservationActions.getReservation);
+route.get('/orders/:id', orderActions.getOrder);
 
 route.post('/orders', orderActions.saveOrder);
 
-// route.put('/reservations/:id', reservationActions.updateReservation);
+route.put('/orders/:id', orderActions.updateOrder);
 
-// route.delete('/reservations/:id', reservationActions.deleteReservation);
+route.delete('/orders/:id', orderActions.deleteOrder);
 
 module.exports = route;

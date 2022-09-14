@@ -7,10 +7,10 @@ const dishSchema = new Schema ({
         type: String,
         reqired: true
     },
-    products: [{
+    products: {
         type: Schema.Types.ObjectId, 
         ref: "Product"
-    }],
+    },
     price: {
         type: Number,
         required: true

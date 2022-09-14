@@ -7,6 +7,8 @@ route.get('/products', productActions.getAllProducts);
 
 route.get('/products/:id', productActions.getProduct);
 
+// route.get('/searchProducts', productActions.searchProduct);
+
 route.post('/products', productActions.saveProduct);
 
 route.put('/products/:id', productActions.updateProduct);
