@@ -5,6 +5,7 @@ const reservationActions = require('../actions/reservation-actions');
 
 route.get('/reservations', reservationActions.getAllReservations);
 
+
 // route.get('/reservations/:id', reservationActions.getReservation);
 
 route.post('/reservations', reservationActions.saveReservation);

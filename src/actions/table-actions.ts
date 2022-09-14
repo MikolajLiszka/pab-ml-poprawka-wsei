@@ -13,12 +13,12 @@ export class TableActions {
 
         const name = req.body.name;
         const pplCount = req.body.pplCount;
-        const taken = req.body.taken
+        const reservation = req.body.reservation
 
         const newTable = new Table({
             name: name,
             pplCount: pplCount,
-            taken: taken
+            reservation: reservation
         })
 
         await newTable.save();
@@ -28,10 +28,10 @@ export class TableActions {
 
     async getAllTables(req: Request, res: Response) {
 
-        const doc = Table.find({}, (err: any, doc: any) => {
+        const doc = await Table.find().populate("reservation")
             console.log(doc);
             res.status(200).json(doc);
-        })
+        
     }
 
     async getTable(req: Request, res: Response){
@@ -41,21 +41,21 @@ export class TableActions {
         res.status(201).json(table);
     }
 
-    async getAllFreeTables(req: Request, res: Response) {
+//     async getAllFreeTables(req: Request, res: Response) {
 
-        const doc = Table.find({}, (err: any, doc: any) => {
+//         const doc = Table.find({}, (err: any, doc: any) => {
 
-        let array: Object[] = [];
+//         let array: Object[] = [];
 
-        doc.forEach((free: any) => {
-            if(free.taken == false){
-                array.push(free);
-            }
-            // console.log(free.taken, free.name)
-        })
-        res.status(200).json(array);
-    })
-}
+//         doc.forEach((free: any) => {
+//             if(free.taken == false){
+//                 array.push(free);
+//             }
+//             // console.log(free.taken, free.name)
+//         })
+//         res.status(200).json(array);
+//     })
+// }
 
         // const collection = await Table.find({ pplCount: false})
 
@@ -71,35 +71,35 @@ export class TableActions {
         // }
 
 
-    async getAllTakenTables(req: Request, res: Response) {
+    // async getAllTakenTables(req: Request, res: Response) {
 
-        const doc = Table.find({}, (err: any, doc: any) => {
+    //     const doc = Table.find({}, (err: any, doc: any) => {
 
-            let array: Object[] = [];
+    //         let array: Object[] = [];
     
-            doc.forEach((taken: any) => {
-                if(taken.taken == true){
-                    array.push(taken);
-                }
-                // console.log(free.taken, free.name)
-            })
-            res.status(200).json(array);
-        })
-    }
+    //         doc.forEach((taken: any) => {
+    //             if(taken.taken == true){
+    //                 array.push(taken);
+    //             }
+    //             // console.log(free.taken, free.name)
+    //         })
+    //         res.status(200).json(array);
+    //     })
+    // }
 
     async updateTable(req: Request, res: Response) {
         const id = req.params.id;
 
         const name = req.body.name;
         const pplCount = req.body.pplCount;
-        const taken = req.body.taken;
+        // const taken = req.body.taken;
 
         const table = await Table.findOne({ _id: id })
 
         if(table) {
             table.name = name;
             table.pplCount = pplCount;
-            table.taken = taken;
+            // table.taken = taken;
             await table.save();
             res.status(201).json(table);
         }
