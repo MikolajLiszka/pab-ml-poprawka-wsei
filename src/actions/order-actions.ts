@@ -92,6 +92,17 @@ async getNotReadyOrders(req: Request, res: Response) {
         const id = req.params.id;
   
         const order = await Order.findOne({_id:id})
+        .populate//("dishes")
+        ([{
+            path: 'dishes dishes',
+            populate: { path: 'products'}},
+            {
+            path: 'employee'
+            },
+            {
+            path: 'reservation',
+            populate: { path: 'table'}
+        }]);
   
         res.status(200).json(order);
       }
