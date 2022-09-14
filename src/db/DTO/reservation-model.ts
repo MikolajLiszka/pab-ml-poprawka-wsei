@@ -10,12 +10,10 @@ const reservationSchema = new Schema({
     },
     start: {
       type: Date,
-      required: true,
       default: Date.now(),
     },
     end: {
       type: Date,
-      required: true,
       default: Date.now(),
     },
     client: {

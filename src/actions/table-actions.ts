@@ -6,10 +6,13 @@ import mongoose, { Collection } from 'mongoose'
 import { Restaurant } from '../db/DTO/restaurant-model';
 import { Table } from '../db/DTO/table-model'
 import { readlink } from 'fs';
+import { Reservation } from '../db/DTO/reservation-model';
 
 export class TableActions {
 
     async saveTable(req: Request, res: Response) {
+
+        const id = req.params._id
 
         const name = req.body.name;
         const pplCount = req.body.pplCount;
@@ -22,6 +25,8 @@ export class TableActions {
         })
 
         await newTable.save();
+
+        // const reservationById = Reservation.updateOne({_id: newTable.reservation?.prototype?.id},{$set: {table: newTable.id}})
 
         res.status(201).json(newTable);
     }

@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import { ProductActions } from './actions/product-actions';
 import { Employee } from './db/DTO/employee-model';
 import { Reservation } from './db/DTO/reservation-model';
+import { Order } from './db/DTO/order-model';
 
 const app = express()
 
@@ -26,6 +27,8 @@ const employeeRoute = require('./routes/employee')
 
 const reservationRoute = require('./routes/reservation')
 
+const ordersRoute = require('./routes/order')
+
 app.use('/', restaurantRoute)
 
 app.use('/', tableRoute)
@@ -37,5 +40,7 @@ app.use('/', dishRoute)
 app.use('/', employeeRoute)
 
 app.use('/', reservationRoute)
+
+app.use('/', ordersRoute)
 
 app.listen(3000)

@@ -6,11 +6,11 @@ import { Table } from "./table-model";
 
 const orderSchema = new Schema ({
     employee: {
-        type: Employee,
+        type: String,
         required: true
     },
     dishes: {
-        type: Dish,
+        type: String,
         required: true
     },
     status: {
@@ -18,11 +18,11 @@ const orderSchema = new Schema ({
         required: true
     },
     table: {
-        type: Table,
-        required: true
+        type: mongoose.Types.ObjectId,
+        ref: "Table",
     },
     price: {
-        type: String,
+        type: Number,
         required: true// tu jakaśoperacja arytmetyczna
     }
 });
