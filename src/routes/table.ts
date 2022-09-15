@@ -7,7 +7,7 @@ router.get('/tables', tableActions.getAllTables);
 
 router.get('/tables/:id', tableActions.getTable);
 
-// router.get('/free', tableActions.getAllFreeTables);
+router.get('/reserved', tableActions.getAllReservedTables);
 
 // router.get('/taken', tableActions.getAllTakenTables);
 

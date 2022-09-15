@@ -19,6 +19,10 @@ const reservationSchema = new Schema({
     client: {
       type: String,
     },
+    order: {
+      type: mongoose.Types.ObjectId,
+      ref: "Order",
+    }
   });
 
 export const Reservation = mongoose.model('Reservation', reservationSchema)

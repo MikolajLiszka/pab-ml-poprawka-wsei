@@ -46,22 +46,22 @@ export class TableActions {
         res.status(201).json(table);
     }
 
-//     async getAllFreeTables(req: Request, res: Response) {
+    async getAllReservedTables(req: Request, res: Response) {
 
-        // const doc = Table.find({}, (err: any, doc: any) => {
+        const doc = Reservation.find({}, (err: any, doc: any) => {
 
-        // let array: Object[] = [];
+        let array: Object[] = [];
 
-        // doc.forEach((free: any) => {
-        //     if(free.taken == false){
-        //         array.push(free);
-        //     }
-        //     // console.log(free.taken, free.name)
-        // })
-        // res.status(200).json(array);
-//     })
+        doc.forEach((free: any) => {
+            if(free.table != ""){
+                array.push(free);
+            }
+            // console.log(free.taken, free.name)
+        })
+        res.status(200).json(array);
+    })
 
-// }
+}
 
         // const collection = await Table.find({ pplCount: false})
 
